@@ -30,7 +30,7 @@ class Example extends React.Component {
       <GazeButton onClick={() => this.setState({buttonIsClicked: true})} duration={2000}>
           {time => (
             <Text>
-              {buttonIsClicked ? 'You have clicked me' `Gaze me for ${time} milliseconds`}
+              {buttonIsClicked ? 'You have clicked me' : `Gaze me for ${time} milliseconds`}
             </Text>
           )}
       </GazeButton>
