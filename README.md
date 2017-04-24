@@ -2,7 +2,7 @@
 
 > 👀 Extension of ReactVR's `VrButton`. Gaze for {duration} ms to click the button!
 
-<img src="./gazebutton.gif"/>
+<img src="./gaze-button.gif"/>
 
 # Usage
 
