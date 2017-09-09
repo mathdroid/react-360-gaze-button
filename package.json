@@ -1,6 +1,6 @@
 {
   "name": "react-vr-gaze-button",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Gaze Button implementation for ReactVR",
   "main": "dist/index.js",
   "files": [
