@@ -3,18 +3,11 @@
   "version": "0.1.3",
   "description": "Gaze Button implementation for ReactVR",
   "main": "dist/index.js",
-  "files": [
-    "package.json",
-    "README.md",
-    "LICENSE",
-    "dist"
-  ],
+  "files": ["package.json", "README.md", "LICENSE", "dist"],
   "repository": "git@github.com:mathdroid/react-vr-gaze-button",
   "author": "<muhammad.mustadi@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "react": "^16.0.0",
-    "react-vr": "^2.0.0",
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.4.0",
