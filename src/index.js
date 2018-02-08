@@ -19,7 +19,7 @@ module.exports = class GazeButton extends React.Component {
   }
 
   componentWillUnmount() {
-    clearCountdown();
+    this.clearCountdown();
   }
 
   resetRemainingTime() {
