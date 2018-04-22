@@ -1,78 +1,92 @@
-const React = require("react");
-const { View, VrButton } = require("react-vr");
+import React from "react";
+import { VrButton } from "react-vr";
 
-module.exports = class GazeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      beingLookedAt: false,
-      remainingTime: 0
-    };
-    this.handleEnter = this.handleEnter.bind(this);
-    this.handleExit = this.handleExit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.clearCountdown = this.clearCountdown.bind(this);
-    this.resetRemainingTime = this.resetRemainingTime.bind(this);
-  }
-  componentDidMount() {
-    this.resetRemainingTime();
-  }
+export default class GazeButton extends React.Component {
+  state = {
+    remainingTime: this.props.duration || 1000,
+    isGazed: false,
+    gazeTimestamp: null
+  };
 
-  componentWillUnmount() {
-    this.clearCountdown();
-  }
-
-  resetRemainingTime() {
-    const { duration } = this.props;
-    this.setState({ remainingTime: duration });
-  }
-
-  handleEnter() {
-    const { duration, onClick } = this.props;
-    this.gazeStart = Date.now();
-    const endTime = this.gazeStart + duration;
-    this.setState({ beingLookedAt: true });
-    this.countdown = setInterval(
+  handleEnter = () => {
+    const { onEnter } = this.props;
+    if (onEnter) {
+      onEnter();
+    }
+    this.setState(
+      () => ({
+        isGazed: true
+      }),
       () => {
-        const { beingLookedAt } = this.state;
-        const currentTime = Date.now();
-        if (!beingLookedAt) {
-          this.clearCountdown();
-        } else if (currentTime > endTime) {
-          this.handleClick();
-        } else {
-          this.setState({ remainingTime: endTime - currentTime });
-        }
-      },
-      16
+        window.requestAnimationFrame(this.step);
+      }
     );
-  }
+  };
 
-  handleExit() {
-    this.setState({ beingLookedAt: false });
-  }
+  handleExit = () => {
+    const { duration, onExit } = this.props;
+    this.setState(
+      () => ({ isGazed: false, remainingTime: duration, gazeTimestamp: null }),
+      () => {
+        if (onExit) {
+          onExit();
+        }
+      }
+    );
+  };
 
-  clearCountdown() {
-    const { duration } = this.props;
-    clearInterval(this.countdown);
-    this.setState({ remainingTime: duration });
-  }
-
-  handleClick() {
+  handleClick = () => {
     const { onClick } = this.props;
-    this.clearCountdown();
-    onClick();
-  }
+    const { gazeTimestamp } = this.state;
+    if (isGazed && gazeTimestamp) {
+      this.setState(
+        () => ({ isGazed: false, remainingTime: 0, gazeTimestamp: null }),
+        () => {
+          onClick();
+        }
+      );
+    }
+  };
+
+  step = timestamp => {
+    const { duration } = this.props;
+    const { isGazed, gazeTimestamp } = this.state;
+    if (isGazed && !gazeTimestamp) {
+      this.setState(() => ({ gazeTimestamp: timestamp }));
+    }
+    // at first step, remaining time equals to duration. No need to get gazeTimestamp from state
+    const remainingTime = gazeTimestamp
+      ? duration + gazeTimestamp - timestamp
+      : duration;
+    if (isGazed) {
+      if (remainingTime >= 0) {
+        this.setState(
+          () => ({ remainingTime }),
+          () => {
+            window.requestAnimationFrame(this.step);
+          }
+        );
+      } else {
+        this.handleClick();
+      }
+    }
+  };
 
   render() {
-    const { onClick, children } = this.props;
-    const { remainingTime } = this.state;
+    const { onClick, render, children, ...props } = this.props;
+    const { remainingTime, isGazed, gazeTimestamp } = this.state;
     return (
-      <View onEnter={this.handleEnter} onExit={this.handleExit}>
-        <VrButton onClick={this.handleClick}>
-          {children(remainingTime)}
-        </VrButton>
-      </View>
+      <VrButton
+        {...props}
+        onEnter={this.handleEnter}
+        onExit={this.handleExit}
+        onClick={this.handleClick}
+      >
+        {render ? render(remainingTime, isGazed, gazeTimestamp) : null}
+        {typeof children === "function"
+          ? children(remainingTime, isGazed, gazeTimestamp)
+          : null}
+      </VrButton>
     );
   }
-};
+}
