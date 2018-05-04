@@ -1,5 +1,5 @@
 import React from "react";
-import { VrButton } from "react-vr";
+import { VrButton } from "react-360";
 
 export default class GazeButton extends React.Component {
   state = {

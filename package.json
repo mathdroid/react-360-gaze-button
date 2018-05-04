@@ -1,7 +1,7 @@
 {
-  "name": "react-vr-gaze-button",
-  "version": "1.0.4",
-  "description": "Gaze Button implementation for ReactVR",
+  "name": "react-360-gaze-button",
+  "version": "0.1.0",
+  "description": "Gaze Button implementation for React 360",
   "main": "dist/index.js",
   "files": [
     "package.json",
@@ -9,9 +9,13 @@
     "LICENSE",
     "dist"
   ],
-  "repository": "git@github.com:mathdroid/react-vr-gaze-button",
+  "repository": "git@github.com:mathdroid/react-360-gaze-button",
   "author": "<muhammad.mustadi@gmail.com>",
   "license": "MIT",
+  "peerDependencies": {
+    "react": "~16.0.0",
+    "react-360": "^1.0.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
