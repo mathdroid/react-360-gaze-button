@@ -37,22 +37,19 @@ export default class GazeButton extends React.Component {
 
   handleClick = () => {
     const { onClick } = this.props;
-    const { gazeTimestamp } = this.state;
-    if (isGazed && gazeTimestamp) {
-      this.setState(
-        () => ({ isGazed: false, remainingTime: 0, gazeTimestamp: null }),
-        () => {
-          onClick();
-        }
-      );
-    }
+    this.setState(
+      () => ({ isGazed: false, remainingTime: 0, gazeTimestamp: null }),
+      () => {
+        onClick();
+      }
+    );
   };
 
   step = timestamp => {
     const { duration } = this.props;
     const { isGazed, gazeTimestamp } = this.state;
     if (isGazed && !gazeTimestamp) {
-      this.setState(() => ({ gazeTimestamp: timestamp }));
+      this.setState(state => ({ ...state, gazeTimestamp: timestamp }));
     }
     // at first step, remaining time equals to duration. No need to get gazeTimestamp from state
     const remainingTime = gazeTimestamp
@@ -67,7 +64,14 @@ export default class GazeButton extends React.Component {
           }
         );
       } else {
-        this.handleClick();
+        this.setState(
+          () => {
+            remainingTime: 0;
+          },
+          () => {
+            this.handleClick();
+          }
+        );
       }
     }
   };
