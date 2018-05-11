@@ -1,14 +1,9 @@
 {
   "name": "react-360-gaze-button",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Gaze Button implementation for React 360",
   "main": "dist/index.js",
-  "files": [
-    "package.json",
-    "README.md",
-    "LICENSE",
-    "dist"
-  ],
+  "files": ["package.json", "README.md", "LICENSE", "dist"],
   "repository": "git@github.com:mathdroid/react-360-gaze-button",
   "author": "<muhammad.mustadi@gmail.com>",
   "license": "MIT",
