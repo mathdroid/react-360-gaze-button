@@ -20,7 +20,7 @@ npm i --save react-360-gaze-button
 import React from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-360";
 
-import GazeButton from "./lib/gaze-button";
+import GazeButton from "react-360-gaze-button";
 
 export default class custom360 extends React.Component {
   state = {
