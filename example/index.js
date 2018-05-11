@@ -1,24 +1,35 @@
 import React from "react";
 import { AppRegistry, StyleSheet, Text, View } from "react-360";
+
 import GazeButton from "react-360-gaze-button";
 
-export default class example extends React.Component {
+export default class custom360 extends React.Component {
+  state = {
+    gazed: false
+  };
+
+  setGazed = () => {
+    this.setState({ gazed: true });
+  };
   render() {
+    const { gazed } = this.state;
     return (
       <View style={styles.panel}>
-        <View style={styles.greetingBox}>
-          <GazeButton
-            duration={5000}
-            onClick={() => {
-              alert("hey");
-            }}
-            render={remainingTime => (
+        <GazeButton
+          duration={3000}
+          onClick={this.setGazed}
+          render={(remainingTime, isGazed) => (
+            <View style={styles.greetingBox}>
               <Text style={styles.greeting}>
-                Welcome to React {remainingTime}
+                {gazed
+                  ? "You have gazed me"
+                  : isGazed
+                    ? remainingTime
+                    : "Gaze me"}
               </Text>
-            )}
-          />
-        </View>
+            </View>
+          )}
+        />
       </View>
     );
   }
@@ -44,4 +55,4 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent("example", () => example);
+AppRegistry.registerComponent("custom360", () => custom360);
