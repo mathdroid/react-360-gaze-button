@@ -12,7 +12,7 @@
 npm i --save react-360-gaze-button
 ```
 
-2.  Import to your file add pass it `onClick` (function) and `duration` (number, ms, defaults to 1000 ms) as props. Renders a `children` function prop that receives 3 arguments, in this order: `remainingTime`: Remaining time to gaze in ms, `isGazed`: boolean that indicates whether the button is being gazed, and `gazeTimestamp`: the timestamp of the latest onEnter event, `null` if `isGazed` is `false`, and returns a component. You can also pass a `render` prop with 1 argument, same as using `children`.
+2.  Import to your file add pass it `onClick` (function) and `duration` (number, ms, defaults to 1000 ms) as props. Renders a `children` function prop that receives 3 arguments, in this order: `remainingTime`: Remaining time to gaze in ms, `isGazed`: boolean that indicates whether the button is being gazed, and `gazeTimestamp`: the timestamp of the latest onEnter event, `null` if `isGazed` is `false`, and returns a component. You can also pass a `render` prop with 3 argument, same as using `children`.
 
 3.  You can pass any other props and it will be pased to the `VrButton` instance.
 
