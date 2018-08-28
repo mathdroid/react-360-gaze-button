@@ -8,6 +8,14 @@ export default class GazeButton extends React.Component {
     gazeTimestamp: null
   };
 
+  animationFrame = null;
+
+  componentWillUnmount() {
+    if (this.animationFrame) {
+      window.cancelAnimationFrame(this.animationFrame);
+    }
+  }
+
   handleEnter = () => {
     const { onEnter } = this.props;
     if (onEnter) {
@@ -18,7 +26,7 @@ export default class GazeButton extends React.Component {
         isGazed: true
       }),
       () => {
-        window.requestAnimationFrame(this.step);
+        this.animationFrame = window.requestAnimationFrame(this.step);
       }
     );
   };
@@ -60,7 +68,7 @@ export default class GazeButton extends React.Component {
         this.setState(
           () => ({ remainingTime }),
           () => {
-            window.requestAnimationFrame(this.step);
+            this.animationFrame = window.requestAnimationFrame(this.step);
           }
         );
       } else {
@@ -73,6 +81,8 @@ export default class GazeButton extends React.Component {
           }
         );
       }
+    } else {
+      this.animationFrame = null;
     }
   };
 
