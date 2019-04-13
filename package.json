@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "Gaze Button implementation for React 360",
   "main": "dist/index.js",
-  "files": ["package.json", "README.md", "LICENSE", "dist"],
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "dist"
+  ],
   "repository": "git@github.com:mathdroid/react-360-gaze-button",
   "author": "<muhammad.mustadi@gmail.com>",
   "license": "MIT",
@@ -15,7 +20,7 @@
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.4.0",
-    "babel-preset-react-native": "^5.0.0",
+    "babel-preset-react-native": "^5.0.2",
     "babel-preset-stage-2": "^6.24.1",
     "np": "^2.13.2"
   },
