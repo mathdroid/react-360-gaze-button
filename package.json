@@ -17,7 +17,7 @@
     "react-360": "^1.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react-native": "^5.0.2",
